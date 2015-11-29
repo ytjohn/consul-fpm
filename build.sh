@@ -18,7 +18,7 @@ if [ ! -d rootfs/usr/share/consul-ui ]
 then
   mkdir -p rootfs/usr/share
   echo "Downloading sources (2/2)..."
-  URL=URL=${BASE_URL}/${VERSION}_web_ui.zip
+  URL=${BASE_URL}/${VERSION}_web_ui.zip
   wget -qO tmp.zip $URL && unzip tmp.zip -d rootfs/usr/share && rm tmp.zip
   mv rootfs/usr/share/dist rootfs/usr/share/consul-ui
   rm rootfs/usr/share/consul-ui/.gitkeep
@@ -34,7 +34,7 @@ done
 for TYPE in $TYPES
 do
   echo "Creating $TYPE package..."
-  fpm -s dir -t $TYPE -C rootfs -n consul -v 0.5.0 \
+  fpm -s dir -t $TYPE -C rootfs -n consul -v ${VERSION} \
   --iteration $TIMESTAMP --epoch $TIMESTAMP \
   --after-install meta/after-install.sh \
   --before-remove meta/before-remove.sh \
